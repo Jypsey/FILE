@@ -18,7 +18,7 @@ BAN_SUPPORT = f"{BAN_SUPPORT}"
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def start_command(client: Client, message: Message):
-    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>", quote=True)
+    
     user_id = message.from_user.id
 
     # Check if user is banned
@@ -74,7 +74,7 @@ async def start_command(client: Client, message: Message):
                 print(f"Error decoding ID: {e}")
                 return
 
-        temp_msg = await message.reply("<b>Please wait...</b>")
+        
         try:
             messages = await get_messages(client, ids)
         except Exception as e:
@@ -142,14 +142,16 @@ async def start_command(client: Client, message: Message):
             ]
         )
         await message.reply_photo(
-            photo=START_PIC,
+            photo="https://envs.sh/sdS.jpg",
             caption=START_MSG.format(
                 first=message.from_user.first_name,
                 last=message.from_user.last_name,
                 username=None if not message.from_user.username else '@' + message.from_user.username,
                 mention=message.from_user.mention,
                 id=message.from_user.id
-            ))
+            ),
+            reply_markup=reply_markup
+        )
         
         return
 
@@ -164,7 +166,7 @@ async def start_command(client: Client, message: Message):
 chat_data_cache = {}
 
 async def not_joined(client: Client, message: Message):
-    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>")
+    
     user_id = message.from_user.id
     buttons = []
     count = 0
@@ -205,16 +207,13 @@ async def not_joined(client: Client, message: Message):
                                 expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY) if FSUB_LINK_EXPIRY else None)
                             link = invite.invite_link
 
-                    buttons.append([InlineKeyboardButton(text=name, url=link)])
+                    buttons.append([InlineKeyboardButton(text="Request to join", url=link)])
                     count += 1
-                    await temp.edit(f"<b>{'! ' * count}</b>")
+                   
 
                 except Exception as e:
                     print(f"Error with chat {chat_id}: {e}")
-                    return await temp.edit(
-                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @adishsuresh/i></b>\n"
-                        f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
-                    )
+                    
 
         # Retry Button
         try:
@@ -228,7 +227,7 @@ async def not_joined(client: Client, message: Message):
             pass
 
         await message.reply_photo(
-            photo=FORCE_PIC,
+            photo="https://envs.sh/sdS.jpg",
             caption=FORCE_MSG.format(
                 first=message.from_user.first_name,
                 last=message.from_user.last_name,
@@ -241,10 +240,7 @@ async def not_joined(client: Client, message: Message):
 
     except Exception as e:
         print(f"Final Error: {e}")
-        await temp.edit(
-            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @adishsuresh</i></b>\n"
-            f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
-        )
+       
 
 #=====================================================================================##
 
