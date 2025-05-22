@@ -138,6 +138,7 @@ async def start_command(client: Client, message: Message):
         reply_markup = InlineKeyboardMarkup(
             [
                     [InlineKeyboardButton("ʜᴇʟᴘ",callback_data = "help")]
+            ]
         )
         await message.reply_photo(
             photo=START_PIC,
