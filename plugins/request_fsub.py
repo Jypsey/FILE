@@ -15,6 +15,7 @@ from database.database import *
 #Request force sub mode commad,,,,,,
 @Bot.on_message(filters.command('fsub_mode') & filters.private & admin)
 async def change_force_sub_mode(client: Client, message: Message):
+    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>", quote=True)
     channels = await db.show_channels()
 
     if not channels:
